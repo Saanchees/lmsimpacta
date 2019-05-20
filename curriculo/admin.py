@@ -7,10 +7,14 @@ __alunos__ = ["aluno1@aluno.faculdadeimpacta.com.br",
 
 class DisciplinaInline(admin.TabularInline):
     model = Curso.disciplinas.through
+    verbose_name_plurar = "Matriz Curricular"
 
 
 class CursoAdmin(admin.ModelAdmin):
-    fieldsets = [('Informações Básicas',{'fields':['nome','sigla','semestre',('tipo','periodo')]})]
+    fieldsets = [('Informações Básicas',{
+                                'fields':['nome','sigla','semestre',('tipo','periodo')] 
+                               }),
+                ('Sobre o Curso', {'fields': ['descricao'], 'classes': ['collapse']})]
     list_display = ('nome', 'sigla')
     search_fields = ('nome', 'sigla')
     inlines = [DisciplinaInline, ]

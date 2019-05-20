@@ -15,7 +15,7 @@ class Curso(models.Model):
     ]
     nome = models.CharField(max_length=255, unique=True)
     sigla = models.CharField(max_length=5, unique=True)
-    tipo = models.CharField(max_length=4, choices=tipos)
+    tipo = models.CharField(max_length=4, choices=tipos, default='CST')
     descricao = models.TextField(blank=True)
     semestres = models.IntegerField(default=4)
     periodo = models.ManyToManyField('Periodo')

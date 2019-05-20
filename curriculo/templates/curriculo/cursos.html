@@ -1,0 +1,15 @@
+{% extends 'base.html' %}
+
+{% block titulo %}
+Lista de cursos
+{% endblock titulo %}
+
+{% block main %}
+<h3>Lista de Cursos disponíveis</h3><br/>
+
+<ul>
+{% for curso in cursos %}
+    <li><a href="{% url 'curriculo:curso' curso.sigla %}">{{ curso.nome }}</a></li>
+{% endfor %}
+</ul>
+{% endblock main %}
