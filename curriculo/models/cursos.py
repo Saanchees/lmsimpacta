@@ -6,10 +6,19 @@ class Curso(models.Model):
     '''
     Classe Curso
     '''
+    tipos = [
+        ('CST', 'Tecnólogo'),
+        ('BACH', 'Bacharelado'),
+        ('ESP', 'Especialização'),
+        ('MST', 'Mestrado'),
+        ('PHD', 'Doutorado')
+    ]
     nome = models.CharField(max_length=255, unique=True)
     sigla = models.CharField(max_length=5, unique=True)
+    tipo = models.CharField(max_length=4, choices=tipos)
     descricao = models.TextField(blank=True)
     semestres = models.IntegerField(default=4)
+    periodo = models.ManyToManyField('Periodo')
     disciplinas = models.ManyToManyField(Disciplina,
                                          through='MatrizCurricular')
 
@@ -43,3 +52,17 @@ class MatrizCurricular(models.Model):
                                    on_delete=models.SET_NULL,
                                    null=True)
     semestre = models.IntegerField()
+
+
+class Periodo(models.Model):
+    turno = models.CharField(max_length=20)
+    entrada = models.TimeField()
+    saida = models.TimeField()
+
+    class Meta:
+        ordering = ['entrada']
+
+    def __str__(self):
+        return "{} - das {} as {}".format(self.turno,
+                                          self.entrada.isoformat(timespec='minutes'),
+                                          self.saida.isoformat(timespec='minutes'))
