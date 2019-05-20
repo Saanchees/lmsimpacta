@@ -10,6 +10,7 @@ class DisciplinaInline(admin.TabularInline):
 
 
 class CursoAdmin(admin.ModelAdmin):
+    fieldsets = [('Informações Básicas',{'fields':['nome','sigla','semestre',('tipo','periodo')]})]
     list_display = ('nome', 'sigla')
     search_fields = ('nome', 'sigla')
     inlines = [DisciplinaInline, ]
