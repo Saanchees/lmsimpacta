@@ -50,7 +50,7 @@
               Cursos
             </a>
             <div class="dropdown-menu" aria-labelledby="cursosDropdown">
-              {% for curso in cursos_menu %}
+              {% for curso in curso_menu %}
               <a class="dropdown-item" href="{% url 'curriculo:curso' curso.sigla %}">{{ curso.nome }}</a>
               {% empty %}
               <p class="p-3 text-muted">
